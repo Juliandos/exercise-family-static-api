@@ -37,6 +37,7 @@ def get_members():
 @app.route('/members/<int:member_id>', methods=['GET'])
 def get_single_member(member_id):
     member = jackson_family.get_member(member_id)
+    print("Member", member)
     if member:
         return jsonify({
             "id": member["id"],
@@ -78,7 +79,7 @@ def add_member():
         member['id'] = data['id']
 
     jackson_family.add_member(member)
-    return jsonify({}), 200
+    return jsonify(member), 200
 
 @app.route('/members/<int:member_id>', methods=['DELETE'])
 def delete_member(member_id):
